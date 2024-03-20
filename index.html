@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join</title>
+    <link rel="icon" type="image/x-icon" href="./favicon/favicon.ico">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./fonts/fonts.css">
+    <link rel="stylesheet" href="./templates/css/header.css">
+    <link rel="stylesheet" href="./templates/css/sidebar.css">
+    <link rel="stylesheet" href="./templates/css/contacts.css">
+    <link rel="stylesheet" href="./templates/css/board.css">
+    <link rel="stylesheet" href="./templates/css/addTask.css">
+    <link rel="stylesheet" href="./templates/css/addTaskOverlay.css">
+    <link rel="stylesheet" href="./templates/css/summary.css">
+    <link rel="stylesheet" href="./templates/css/contactsResponsive.css">
+    <link rel="stylesheet" href="./templates/css/login.css">
+
+    <script src="./templates/js/login.js"></script>
+    <script src="./templates/js/signUp.js"></script>
+    <script src="main.js"></script>
+    <script src="./templates/js/backend.js"></script>
+    <script src="./templates/js/includeHTML.js"></script>
+    <script src="./templates/js/contacts.js"></script>
+    <script src="./templates/js/templates/contactsTemplates.js"></script>
+    <script src="./templates/js/board.js"></script>
+    <script src="./templates/js/board2.js"></script>
+    <script src="./templates/js/addTask1.js"></script>
+    <script src="./templates/js/addTask2.js"></script>
+    <script src="./templates/js/templates/addTaskTemplates.js"></script>
+    <script src="./templates/js/addTaskOverlay.js"></script>
+    <script src="./templates/js/templates/addTaskOverlayTemplates.js"></script>
+    <script src="./templates/js/summary.js"></script>
+    <script src="./templates/js/templates/legalHelpTemplates.js"></script>
+    <script src="./templates/js/templates/boardTemplates.js"></script>
+</head>
+
+<body id="body" onload="init()">
+    <div w3-include-html="./templates/html/header.html"></div>
+    <div w3-include-html="./templates/html/sidebar.html"></div>
+    <div class="overlaySection d-none" id="overlaySection" onclick="closeContactOverlay()"></div>
+    <div class="contentSection contentSectionAddTask" id="contentSection"></div>
+</body>
+
+</html>

@@ -1,0 +1,416 @@
+.pointer {
+    cursor: pointer;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.blueText {
+    color: #29ABE2;
+    font-size: 64px;
+}
+
+.center {
+    justify-content: center;
+    align-items: center;
+}
+
+.marginLeft25 {
+    margin-left: 25%;
+}
+
+.goodMorning {
+    font-size: 47px;
+}
+
+.summarySection {
+    padding-top: 30px;
+    padding-left: 80px;
+    background: #F6F7F8;
+    height: 100%;
+    overflow-y: scroll;
+}
+.summarySection::-webkit-scrollbar{
+    display: none;
+  }
+
+.headlineDiv {
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 57px;
+}
+
+.contentAndGreeting {
+    justify-content: flex-start;
+}
+
+.summaryHeadline {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 61px;
+    line-height: 120%;
+    color: #000000;
+    border-right: 3px solid #29ABE2;
+    padding-right: 60px;
+    margin-right: 24px;
+    max-width: 270px !important;
+    margin-bottom: 30px !important;
+}
+.innerContentSummary{
+    margin-bottom: 80px;
+}
+.taskbox {
+    cursor: pointer;
+    height: 170px;
+    width: 170px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+    text-align: center;
+}
+
+.taskbox:hover {
+    background: #2A3647;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    color: #FFFFFF;
+}
+
+.tasknumber {
+    padding-bottom: 8px;
+    font-weight: 600;
+    font-size: 64px;
+}
+
+.tasktext {
+    font-weight: 400;
+    font-size: 21px;
+    width: 100px;
+    height: 30px;
+    margin: 5px;
+}
+
+.taskSection {
+    gap: 35px;
+}
+
+.newsAndDate {
+    margin-right: 32px;
+    width: 580px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+    text-align: center;
+    margin-top: 32px;
+    font-size: 14px;
+}
+
+.newsAndDate:hover {
+    background: #2A3647;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    color: #FFFFFF;
+}
+
+.news {
+    width: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-right: 2px solid #D1D1D1;
+    ;
+}
+
+.news img {
+    width: 60px;
+    height: 60px;
+    margin-right: 24px;
+}
+
+.newsNumber {
+    font-size: 47px;
+}
+
+.date {
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.personalTasks {
+    gap: 35px;
+}
+
+.personalTaskBox {
+    width: 272.5px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+    text-align: center;
+    margin-top: 32px;
+}
+
+.personalTaskBox:hover {
+
+    background: #2A3647;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    color: #FFFFFF;
+}
+
+.toDobg {
+    background-size: 69px;
+    background-repeat: no-repeat;
+    background-position: 25%;
+    background-image: url('../../img/pencilblue.png');
+    background-color: #FFFFFF;
+}
+
+.toDobg:hover {
+    background-image: url('../../img/pencilwhite.png');
+    background-size: 69px;
+    background-repeat: no-repeat;
+    background-position: 25%;
+}
+
+.toDoNumber {
+    font-size: 64px;
+}
+
+.doneNumber {
+    font-size: 64px;
+}
+
+.donebg {
+    background-size: 69px;
+    background-image: url('../../img/checkboxblue.png');
+    background-repeat: no-repeat;
+    background-position: 25%;
+    background-color: #FFFFFF;
+}
+
+.donebg:hover {
+    background-size: 69px;
+    background-image: url('../../img/checkboxwhite.png');
+    background-repeat: no-repeat;
+    background-position: 25%;
+}
+
+.insertDate {
+    font-size: 21px;
+}
+
+.managementText {
+    display: none;
+}
+
+.nutshelltext {
+    font-size: 27px;
+}
+
+@media (max-width: 1100px) {
+    .innerContentSummary{
+        margin-bottom: 30px;
+    }
+    .greeting {
+        position: absolute;
+        left: 0;
+        right: 0;
+        text-align: center;
+    }
+
+    .headlineDiv {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 0px;
+    }
+
+    .contentAndGreeting {
+        justify-content: center;
+
+    }
+
+    .summarySection {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        padding: 0;
+    }
+
+    .greeting {
+        animation: greeting-fade 3s ease-in-out;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        z-index: -1;
+    }
+
+    @keyframes greeting-fade {
+        from {
+            background: #F6F7F8;
+            z-index: 3;
+            color: #000000;
+        }
+
+        to {
+            background: none;
+            z-index: -1;
+            color: #F6F7F8;
+        }
+    }
+}
+
+@media (max-width: 750px) {
+    .contentAndGreeting {
+        justify-content: flex-start;
+    }
+
+    .summarySection {
+        display: flex;
+        flex-direction: column;
+        padding: 35px;
+        align-items: center;
+    }
+
+    .headlineDiv {
+        width: 360px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        margin-bottom: 24px;
+    }
+
+    .summaryHeadline {
+        border: none;
+        margin-top: 20px !important;
+        margin-bottom: 20px !important;
+    }
+
+    .managementText {
+        display: block;
+        font-size: 20px;
+    }
+
+    .nutshelltext {
+        font-size: 27px;
+        margin: 0;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        font-size: 20px !important;
+        color: #2A3647;
+        box-shadow: -18px 23px 0px -20px #29ABE2;
+    }
+
+    .taskSection {
+        gap: 15px;
+    }
+
+    .taskbox {
+        height: 110px;
+        width: 110px;
+        border-radius: 20px;
+    }
+
+    .tasknumber {
+        padding-bottom: 0px;
+        font-size: 47px;
+    }
+
+    .tasktext {
+        font-size: 14px;
+        width: 65px;
+    }
+
+
+    .newsAndDate {
+        height: 110px;
+        width: 360px;
+        border-radius: 15px;
+        margin-top: 25px;
+    }
+
+    .personalTaskBox {
+        width: 174px;
+        border-radius: 15px;
+        height: 110px;
+        margin-top: 25px;
+    }
+
+    .toDoNumber {
+        font-size: 47px;
+    }
+
+    .doneNumber {
+        font-size: 47px;
+    }
+
+    .toDobg {
+        background-size: 40px;
+    }
+
+    .toDobg:hover {
+        background-size: 40px;
+    }
+
+    .donebg {
+        background-size: 40px;
+    }
+
+    .donebg:hover {
+        background-size: 40px;
+    }
+
+    .personalTasks {
+        gap: 15px;
+    }
+
+    .news img {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@media (max-width: 500px) {
+    .summarySection {
+        padding: 15px;
+    }
+}
+
+@media (max-height: 700px) {
+    .summaryHeadline {
+        margin-top: 0px !important;
+        margin-bottom: 0px !important;
+    }
+
+    .newsAndDate {
+        margin-top: 10px;
+        margin-right: 0px;
+    }
+
+    .personalTaskBox {
+        margin-top: 10px;
+    }
+
+    .headlineDiv {
+        width: 350px;
+    }
+}

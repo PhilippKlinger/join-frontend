@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join</title>
+  <link rel="icon" type="image/x-icon" href="../../favicon/favicon.ico" />
+
+  <link rel="stylesheet" href="../../style.css" />
+  <link rel="stylesheet" href="../../fonts/fonts.css" />
+  <link rel="stylesheet" href="../../templates/css/header.css" />
+  <link rel="stylesheet" href="../../templates/css/sidebar.css" />
+  <link rel="stylesheet" href="../../templates/css/login.css" />
+
+  <script src="../../main.js"></script>
+  <script src="../js/backend.js"></script>
+  <script src="../js/login.js"></script>
+  <script src="../js/signUp.js"></script>
+  <script src="../js/includeHTML.js"></script>
+
+</head>
+
+<body onload="initLogin()">
+  <div class=" logoAnimationDiv" id="logoAnimation" onclick="">
+  <img class="logoAnimationImg" src="../../img/Logo.png" alt=""></div>
+  <div id="msgBoxDiv" class="msgBox d-none d-flex">
+    <div id="msgBox" class="msgBoxContent"></div>
+  </div>
+
+  <div id="loginContent" class="loginContent d-flex center">
+    <div id="textSignupButton" class="textSignupButton">
+      <div>Not a Join user?</div>
+      <button class="bluebutton signUpBtn" onclick="leadToSignUp()">Sign up</button>
+    </div>
+    <div id="innerContentLogin" class="innerContentLogin">
+      <div id="loginHeadlineDiv" class="loginHeadlineDiv">
+        <h1 id="loginHeadline">Log in</h1>
+        <img class="loginHeadlineDivimg" src="../../img/blueline.png" alt="" />
+      </div>
+
+      <form id="emailAndPassword" class="emailAndPassword" onsubmit="login(); return false;">
+        <input required id="loginEmail" class="email emailimg" type="email" placeholder="Email" />
+        <input required id="loginPassword" class="email passwordimg" type="password" placeholder="Password" />
+      </form>
+      <div id="rememberAndAPassword" class="rememberAndAPassword">
+
+        <div class="d-flex center rememberCheckbox">
+          <input class="" type="checkbox" id="scales" name="scales" checked>
+          <label for="scales">Remember me</label>
+        </div>
+
+
+        <a href="forgotPassword.html" id="passwordLink" class="passwordLink">Forgot my password</a>
+      </div>
+      <div id="loginButtons" class="loginButtons">
+        <button type="submit" form="emailAndPassword" id="loginbtn" class="loginbtn bluebutton">Log in</button>
+        <button id="guest" class="guestbtn" onclick="guestLogIn()">Guest Log in</button>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

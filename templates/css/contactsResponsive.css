@@ -1,0 +1,359 @@
+@media (max-width: 1300px) {
+    .contactsDetail {
+        padding: 20px;
+        padding-top: 30px;
+    }
+
+    .contactsDetailInfoHead h4 {
+        width: 80px;
+        height: 80px;
+        line-height: 1.55;
+    }
+}
+
+@media (max-width: 1200px) {
+    .contactsDetailHead h2 {
+        font-size: 41px;
+        margin-right: 15px;
+    }
+
+    .contactsDetailHead p {
+        font-size: 20px;
+        margin-left: 15px;
+    }
+
+    .contactsDetailInfo {
+        margin-top: 50px;
+    }
+
+    .contactsDetailInfoHeadName {
+        font-size: 35px;
+    }
+
+    .contactsList {
+        width: 100%;
+        min-width: auto;
+    }
+
+    .contactsListGroupHead {
+        width: 300px;
+    }
+
+    .overlayAddContactRightProfilepic {
+        display: none !important;
+    }
+
+    .overlayAddContactLeftHeadline {
+        font-size: 30px;
+    }
+
+    .overlayAddContactLeftCaption {
+        font-size: 20px;
+    }
+
+    .contactsListContactName {
+        width: 170px;
+    }
+
+    .contactsListContactEmail {
+        width: 170px;
+    }
+}
+
+@media (max-width: 1000px) {
+
+    .contactsDetailHead h2 {
+        margin-top: 20px;
+    }
+
+    .contentSection {
+        left: 0;
+        right: 0;
+        bottom: 80px;
+    }
+
+    .overlayAddContact {
+        flex-direction: column;
+        max-width: 500px;
+        height: 90%;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .overlayAddContactLeft {
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        border-bottom-left-radius: 0;
+        width: 100%;
+        align-items: center;
+        height: 100%;
+    }
+
+    .overlayAddContactLeftContent {
+        padding: 50px;
+        padding-top: 10px;
+    }
+
+    .overlayAddContactRightProfilepic {
+        display: flex !important;
+        align-items: center;
+        padding: 0;
+        height: auto;
+        transform: translateY(-35px);
+    }
+
+    .overlayAddContactRight {
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+        transform: translateY(-50px);
+        height: 60%;
+    }
+
+    .overlayAddContactRightInputSection {
+        width: 80%;
+        padding: 0;
+    }
+
+    .overlayAddContactRightButtonSection {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .overlayAddContactRightProfilepic h4 {
+        padding: 20px;
+        margin: 0;
+    }
+
+    .overlayAddContactRightInputSectionHead {
+        display: none;
+    }
+
+    .overlayAddContactLeftContentLogo {
+        display: none;
+    }
+
+    .overlayAddContactRightInputSectionHeadMobile {
+        display: flex;
+        width: 90%;
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+
+    .sidebar {
+        height: 80px;
+        width: 100%;
+        bottom: 0px;
+        top: auto;
+    }
+
+    .sidebarContent {
+        flex-direction: row;
+        padding: 0;
+        gap: 0;
+        height: 100%;
+    }
+
+    .sidebarNav {
+        flex-direction: row;
+        justify-content: space-around;
+        height: 100%;
+    }
+
+    .sidebarLegal {
+        display: none;
+    }
+
+    .sidebarLogo {
+        display: none;
+    }
+
+    .sidebarBtn {
+        padding: 10px;
+        min-width: 120px;
+        justify-content: center;
+    }
+
+    .sidebarBtn img {
+        margin-left: 0;
+    }
+    
+    .contactsDetail {
+        padding-top: 0;  
+    }
+
+    .contactsDetailInfo {
+        margin-top: 20px;
+    }
+
+    .contactsDetailInfoHead {
+        height: 60px;
+    }
+
+    .contactsDetailInfoContent {
+        margin-top: 40px;
+    }
+
+    .joinLogoSmall {
+        display: block;
+    }
+    
+    .helpLogo {
+        display: none;
+    }
+    
+    .helpLogoMobile{
+        display: block;
+    }
+
+    .headerContentRightLogoutLegal {
+        display: block;
+    }
+    
+    .headerContentRightLogoutHelp{
+        display: block;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .sidebarBtn {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-width: 75px;
+        padding: 10px;
+    }
+
+    .contactsDetail h5 {
+        display: block;
+    }
+    
+    .sidebarBtn img {
+        margin: 0;
+        margin-bottom: 10px;
+    }
+
+    .sidebarBtn p {
+        margin: 0;
+    }
+
+    .contactsDetailHead {
+        justify-content: space-between;
+    }
+
+    .contactsDetailHeadPic {
+        display: block;
+    }
+
+    .contactsSection {
+        justify-content: center;
+    }
+
+    .btnMobile {
+        display: flex;
+    }
+
+    .headerTitle {
+        display: none;
+    }
+
+    .hideBtn {
+        display: none;
+    }
+}
+
+@media (max-width: 576px) {
+
+    .overlayAddContact {
+        width: 90%;
+        animation: slideUpContacts 0.8s ease-in-out;
+    }
+
+    .editBtn{
+        flex-direction: row !important;
+    }
+
+    .editBtn img {
+        display: none;
+    }
+  
+    .contactsDetailInfoContentRightEdit {
+        display: none;
+    }
+
+    .contactsDetailBottomMobile {
+        display: block;
+    }
+
+    .contactsDetailInfoContentLeft {
+        width: 100%;
+    }
+
+    .contactsDetailInfoContentRight {
+        display: flex;
+        align-items: flex-end;
+    }
+    
+    .cancelBtn2 {
+        display: none;
+    }
+    
+    .overlayAddContactRightButtonSection {
+        flex-direction: column;
+    }
+
+    .contactsDetailHeadCaption img {
+        display: none;
+    }
+
+    .contactsDetailHeadCaption p {
+        display: none;
+    }
+
+    .contactsDetailInfoHeadName {
+        font-size: 26px;
+    }
+
+    .helpScreenSection {
+        padding: 0px 30px 30px 30px;
+    }
+    
+    .helpScreenSection h1 {
+        font-size: 40px;
+    }
+
+    .sidebarBtn {
+        padding: 5px;
+    }
+
+    .headerContentRight {
+        margin-right: 26px
+    }
+
+    .joinLogoSmall {
+        margin-left: 26px;
+    }
+
+    .headerContentRightLogout {
+        right: 26px;
+    }
+
+    .contactsDetailInfoHead h4 {
+        width: 60px;
+        height: 60px;
+        line-height: 1.5;
+        font-size: 40px;
+    }
+    
+    .contactsDetailInfoHead div {
+        margin-left: 30px;
+    }
+}
+
+@media (max-height: 730px) {
+
+    .sidebarLegal {
+        padding-top: 50px;
+    }
+}

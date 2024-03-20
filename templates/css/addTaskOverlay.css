@@ -1,0 +1,128 @@
+.addTaskOverlay {
+    max-height: 85vh;
+    top: inherit;
+    margin-top: -80px;
+    background-color: white;
+    border-radius: 20px;
+    width: 915px;
+    padding: 30px;
+    margin: 20px;
+    overflow-y: auto;
+    transition: transform 800ms ease-in-out;
+    transform: translate(0%);
+    animation: slideIn 0.8s ease-in-out;
+}
+
+.addTaskOverlay::-webkit-scrollbar {
+    background-color: transparent;
+    width: 8px;
+}
+
+.addTaskOverlay::-webkit-scrollbar-track {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+#categoryOverlay {
+    box-sizing: border-box;
+    padding: 5px 10px;
+    width: 422px;
+    height: 51px;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    font-weight: 400;
+    font-size: 21px;
+    display: flex;
+    align-items: center;
+    background: white url("../../img/dropdownArrow.png") no-repeat right 10px center;
+    cursor: pointer;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translate(150%);
+    }
+
+    to {
+        transform: translate(0%);
+    }
+}
+
+.headlineContainerOverlay {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.headlineContainerOverlay h1 {
+    font-size: 61px;
+    margin: 0;
+}
+
+.headlineContainerOverlay img {
+    height: 16px;
+    width: 16px;
+    transition: ease-in-out 125ms;
+}
+
+.headlineContainerOverlay img:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+    transition: ease-in-out 125ms;
+}
+
+.borderlineOverlay {
+    border: 1px solid #D1D1D1;
+}
+
+
+@media (max-width: 1290px) {
+    .addTaskOverlay {
+        max-height: 85vh;
+    }
+
+    .borderlineOverlay {
+        display: none;
+    }
+
+    .contentLeftAndRightOverlay {
+        flex-direction: column;
+    }
+
+    input {
+        width: 100% !important;
+    }
+
+    textarea {
+        width: 100%;
+    }
+
+    select {
+        width: 100%;
+    }
+
+    .twoButtonsContainerOverlay {
+        margin-top: 20px;
+    }
+
+    #categoryOverlay {
+        width: 100% !important;
+    }
+
+    #categoryDropdownOverlay {
+        width: calc(100% - 1.5px);
+    }
+}
+
+@media (max-width: 570px) {
+    .addTaskOverlay {
+        margin: 0px;
+        max-height: none;
+        height: 100%;
+        width: 100%;
+    }
+
+    .headlineContainerOverlay img {
+        margin-top: 20px
+    }
+}

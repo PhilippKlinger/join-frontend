@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Join</title>
+    <link rel="icon" type="image/x-icon" href="../../favicon/favicon.ico" />
+
+    <link rel="stylesheet" href="../../style.css" />
+    <link rel="stylesheet" href="../../fonts/fonts.css" />
+    <link rel="stylesheet" href="../../templates/css/header.css" />
+    <link rel="stylesheet" href="../../templates/css/sidebar.css" />
+    <link rel="stylesheet" href="../../templates/css/login.css" />
+
+    <script src="../../main.js"></script>
+    <script src="../js/backend.js"></script>
+    <script src="../js/login.js"></script>
+    <script src="../js/signUp.js"></script> 
+    <script src="../js/resetPassword.js"></script> 
+    <script src="../js/includeHTML.js"></script>
+   
+  </head>
+  <body onload="loadUserLogin()">
+    <div id="signUpContent" class="loginContent d-flex center">
+      <div id="logoSignUp" class="logo">
+        <img src="../../img/Logo.png" alt="" />
+      </div>
+
+      <div id="innerContentSignUp" class="innerContentLogin">
+        <div class="arrowblue" class="arrowDiv"  onclick="goBackToLogin()"><img  src="../../img/arrowblue.png" alt=""></div>
+        
+        <div id="signUpHeadlineDiv" class="loginHeadlineDiv">        
+          <h1 id="signUpHeadline">Sign Up</h1>
+          <img class="loginHeadlineDivimg" src="../../img/blueline.png" alt="">
+        </div>
+
+        <form id="SignUpNameEmailAndPassword" class="emailAndPassword NameEmailAndPassword" onsubmit="signUp(); return false;" >
+          <div class="d-flex center column">          
+            <input required id="signUpName" class="email nameimg" type="text" placeholder="Name"/>
+            <input required id="signUpEmail" class="email emailimg" type="email" placeholder="Email"/>
+            <input required id="signUpPassword" class="email passwordimg" type="password" placeholder="Password"/>
+            <button id="signUpbtn" class="loginbtn bluebutton">Sign up</button>
+          </div>
+           
+
+        </form>
+
+
+      </div>
+    </div>
+  </body>
+</html>

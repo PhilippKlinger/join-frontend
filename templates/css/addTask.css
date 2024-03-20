@@ -1,0 +1,562 @@
+.contentSectionAddTask {
+    background-color: #F5F5F5;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.addTaskMainContainer {
+    /*
+    position: absolute;
+    top: inherit;
+    margin-top: -80px;
+    */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.d-none {
+    display: none;
+}
+
+.headlineContainer h1 {
+    font-size: 61px;
+    margin-top: 10px;
+    margin-bottom: 0;
+    width: 100%;
+}
+
+span {
+    font-size: 21px;
+    margin: 5px 0px 5px 0px;
+}
+
+input {
+    box-sizing: border-box;
+    padding: 13px 21px;
+    width: 422px;
+    height: 51px;
+    background: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    font-weight: 400;
+    font-size: 21px;
+}
+
+input:focus {
+    outline: none;
+}
+
+textarea {
+    resize: none;
+    box-sizing: border-box;
+    padding: 18px 21px;
+    width: 422px;
+    height: 119px;
+    background: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    font-family: 'inter', 'sans-serif';
+    font-weight: 400;
+    font-size: 21px;
+}
+
+textarea:focus {
+    outline: none;
+}
+
+select {
+    box-sizing: border-box;
+    padding: 5px 10px;
+    width: 422px;
+    height: 51px;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    font-weight: 400;
+    font-size: 21px;
+}
+
+select:focus {
+    outline: none;
+}
+
+button {
+    font-weight: 400;
+    font-size: 21px;
+}
+
+.contentLeftAndRight {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.borderline {
+    border: 1px solid #D1D1D1;
+    margin: 0px 50px;
+}
+
+/*
+.contentLeft {}
+*/
+
+
+.titleAndInput {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0px 10px 0px;
+}
+
+.descriptionAndTextarea {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0px 10px 0px;
+}
+
+.categoryAndSelect {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0px 10px 0px;
+}
+
+.newCategoryContainer {
+    width: 422px;
+    display: flex;
+}
+
+.newCategoryContainer input {
+    border-right: none;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    padding-right: 0;
+}
+
+.newCategoryColorContainer {
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid #D1D1D1;
+    border-bottom: 1px solid #D1D1D1;
+    padding-right: 10px;
+}
+
+.newCategoryContainer button {
+    cursor: pointer;
+    width: 51px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    transition: ease-in-out 125ms;
+}
+
+.newCategoryContainer button:hover {
+    background-color: lightgray;
+    transition: ease-in-out 125ms;
+}
+
+.checkButton {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.newCategoryContainer img {
+    cursor: pointer;
+}
+
+.newCategoryColors {
+    display: flex;
+    gap: 10px;
+    margin-top: -5px;
+    padding-left: 5px;
+}
+
+.newCategoryColors p {
+    cursor: pointer;
+    transition: ease-in-out 125ms;
+}
+
+.newCategoryColors p:hover {
+    transform: scale(1.2);
+    transition: ease-in-out 125ms;
+}
+
+#category {
+    box-sizing: border-box;
+    padding: 5px 10px;
+    width: 422px;
+    height: 51px;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    font-weight: 400;
+    font-size: 21px;
+    display: flex;
+    align-items: center;
+    background: white url("../../img/dropdownArrow.png") no-repeat right 10px center;
+    cursor: pointer;
+}
+
+.categoryDropdown {
+    width: 420.5px;
+    border: 1px solid #D1D1D1;
+    border-top: none;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    font-weight: 400;
+    font-size: 21px;
+    height: 140px;
+    overflow-y: auto;
+}
+
+.categoryDropdown::-webkit-scrollbar {
+    width: 5px;
+    background-color: transparent;
+}
+
+.categoryDropdown::-webkit-scrollbar-track {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.categoryOption {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 8px;
+    cursor: pointer;
+    transition: all ease-in-out 125ms;
+}
+
+.categoryOption:hover {
+    background-color: lightgray;
+    transition: all ease-in-out 125ms;
+}
+
+.categoryColor {
+    height: 13px;
+    width: 13px;
+    border: 2px solid white;
+    border-radius: 100%;
+}
+
+.assignedToAndSelect {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0px 10px 0px;
+}
+
+.assignedToAndSelect select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: white url("../../img/dropdownArrow.png") no-repeat right 10px center;
+}
+
+.assignedToAndSelect select:hover {
+    cursor: pointer;
+}
+
+.assignedToList {
+    display: flex;
+    flex-wrap: wrap;
+    max-height: 44px;
+    overflow-y: auto;
+}
+
+.assigneeContainer {
+    color: white;
+    height: 40px;
+    width: 40px;
+    border-radius: 100%;
+    margin: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: ease-in-out 125ms;
+}
+
+.assigneeContainer:hover {
+    cursor: pointer;
+    transform: scale(0.9);
+    transition: ease-in-out 125ms;
+}
+
+/*
+.contentRight {}
+*/
+
+.dueDateAndInput {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0px 10px 0px;
+}
+
+.dueDateAndInput input {
+    font-family: 'inter', 'sans-serif';
+}
+
+.prio {
+    margin: 15px 0px 10px 0px;
+}
+
+.prioButtons {
+    margin-top: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    gap: 10px;
+}
+
+.prioButtons button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border: none;
+    width: 136px;
+    height: 51px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    transition: ease-in-out 125ms;
+}
+
+.prioButtons button:hover {
+    cursor: pointer;
+    transform: scale(1.02);
+    box-shadow: 0px 3px 6px rgb(190, 190, 190);
+    transition: ease-in-out 125ms;
+}
+
+.urgent {
+    color: white;
+    background-color: rgb(255, 61, 0) !important;
+    font-weight: bold;
+}
+
+.medium {
+    color: white;
+    background-color: rgb(255, 168, 0) !important;
+    font-weight: bold;
+}
+
+.low {
+    color: white;
+    background-color: rgb(122, 226, 41) !important;
+    font-weight: bold;
+}
+
+.subtasksAndInput {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0px 10px 0px;
+}
+
+.inputAndButton {
+    display: flex;
+}
+
+.inputAndButton input {
+    width: 377px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: none;
+}
+
+.inputAndButton button {
+    width: 51px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    transition: ease-in-out 125ms;
+}
+
+.inputAndButton button:hover {
+    cursor: pointer;
+    background-color: lightgray;
+    transition: ease-in-out 125ms;
+}
+
+.subtasksList {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin-top: -5px;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.subtask {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    height: 20px;
+}
+
+.subtask input {
+    height: 15px;
+    width: 15px;
+    cursor: pointer;
+}
+
+.twoButtons {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    padding: 0px;
+    gap: 25px;
+    margin-bottom: 15px;
+}
+
+.clearButton {
+    background: white;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 18px 10px;
+    gap: 10px;
+    width: 136px;
+    height: 55px;
+    border: 1px solid #2A3647;
+    border-radius: 10px;
+    transition: ease-in-out 125ms;
+}
+
+.clearButton:hover {
+    cursor: pointer;
+    color: rgb(83, 168, 223);
+    border: 1.5px solid rgb(83, 168, 223);
+    transform: scale(1.02);
+    box-shadow: 0px 3px 6px rgb(190, 190, 190);
+    transition: ease-in-out 125ms;
+}
+
+.createTaskButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 18px 15px;
+    gap: 10px;
+    font-weight: 700;
+    color: #FFFFFF;
+    width: 187px;
+    height: 55px;
+    background: #2A3647;
+    border: none;
+    border-radius: 10px;
+    transition: ease-in-out 125ms;
+}
+
+.createTaskButton:hover {
+    cursor: pointer;
+    background-color: rgb(83, 168, 223);
+    transform: scale(1.02);
+    box-shadow: 0px 3px 6px rgb(190, 190, 190);
+    transition: ease-in-out 125ms;
+}
+
+.taskAddedPopUp {
+    height: 60px;
+    position: absolute;
+    animation-name: slideUp;
+    animation-duration: 2s;
+    animation-iteration-count: 2;
+    animation-direction: alternate;
+    animation-timing-function: ease;
+}
+
+@keyframes slideUp {
+    0% {
+        bottom: -60px
+    }
+
+    50% {
+        bottom: 50px
+    }
+
+    100% {
+        bottom: -60px
+    }
+}
+
+
+
+@media (max-width: 1250px) {
+    .addTaskMainContainer {
+        position: absolute;
+        top: inherit;
+        width: 90%;
+        margin-top: -80px;
+    }
+
+    .borderline {
+        display: none;
+    }
+
+    .contentLeftAndRight {
+        flex-direction: column;
+    }
+
+    input {
+        width: 100% !important;
+    }
+
+    textarea {
+        width: 100%;
+    }
+
+    #category {
+        width: 100%;
+    }
+
+    .categoryDropdown {
+        width: calc(100% - 1.5px);
+    }
+
+    .newCategoryContainer {
+        width: 100%;
+    }
+
+    select {
+        width: 100%;
+    }
+
+    .prioButtons button {
+        width: 33%;
+    }
+
+    .twoButtons {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 390px) {
+    .prioButtons button {
+        font-size: 18px;
+    }
+
+    .prioButtons img {
+        height: 10px;
+        width: 15px;
+    }
+
+    .twoButtons button {
+        font-size: 18px;
+    }
+
+    .twoButtons img {
+        height: 10px;
+    }
+}
