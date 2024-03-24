@@ -16,18 +16,18 @@ function guestLogIn() {
   window.location.replace("https://join.philipp-klinger.com/index.html");
 }
 
+
 async function login() {
-  let email = document.getElementById("loginEmail");
-  let password = document.getElementById("loginPassword");
-  let user = userLogin.find(
-    (u) => u.email == email.value && u.password == password.value
-  );
-  localStorage.setItem('currentEmail', email.value);
-  console.log(user);
-  if (user) {
-    console.log("user gefunden");
-    window.location.replace("https://join.philipp-klinger.com/index.html");
-  } else {
+  let username = document.getElementById("loginEmail").value;
+  let password = document.getElementById("loginPassword").value;
+
+  try {
+    const data = await loginWithUsernameAndPassword(username, password); 
+    localStorage.setItem('authToken', data.token);
+    window.location.replace("http://127.0.0.1:5500/index.html"); 
+    console.log("login erfolgreich!");
+  } catch (error) {
+    console.error(error);
     document.getElementById("msgBox").innerHTML = `Email oder Passwort nicht korrekt!`;
     document.getElementById("msgBoxDiv").classList.remove("d-none");
   }

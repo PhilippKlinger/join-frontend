@@ -15,8 +15,8 @@
   <link rel="stylesheet" href="../../templates/css/login.css" />
 
   <script src="../../main.js"></script>
-  <script src="../js/backend.js"></script>
-  <script src="../js/login.js"></script>
+  <script src="../../backend.js"></script>
+  <script src="../../login.js"></script>
   <script src="../js/signUp.js"></script>
   <script src="../js/includeHTML.js"></script>
 
@@ -24,8 +24,8 @@
 
 <body onload="initLogin()">
   <div class=" logoAnimationDiv" id="logoAnimation" onclick="">
-  <img class="logoAnimationImg" src="../../img/Logo.png" alt=""></div>
-  <div id="msgBoxDiv" class="msgBox d-none d-flex">
+  <img class="logoAnimationImg" src="../../img/Logo.png" alt=""></div> 
+    <div id="msgBoxDiv" class="msgBox d-none d-flex">
     <div id="msgBox" class="msgBoxContent"></div>
   </div>
 
@@ -41,7 +41,7 @@
       </div>
 
       <form id="emailAndPassword" class="emailAndPassword" onsubmit="login(); return false;">
-        <input required id="loginEmail" class="email emailimg" type="email" placeholder="Email" />
+        <input required id="loginEmail" class="email emailimg" type="text" placeholder="Email" />
         <input required id="loginPassword" class="email passwordimg" type="password" placeholder="Password" />
       </form>
       <div id="rememberAndAPassword" class="rememberAndAPassword">
