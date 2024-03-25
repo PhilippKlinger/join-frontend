@@ -2,6 +2,7 @@ let newTaskArray = [];
 let prio = undefined;
 let allSubtasks = [];
 let assignedToNames = [];
+let assignedToIds = [];
 let contactsColors = [];
 let objIds = [];
 let dateArray = [];

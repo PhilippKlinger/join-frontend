@@ -142,39 +142,41 @@ function createTask() {
     let title = document.getElementById('title').value;
     let description = document.getElementById('description').value;
     let category = document.getElementById('category').innerText;
-    let date = dateArray;
-    let newTask = {
-        'id': '',
-        'title': title,
-        'description': description,
-        'category': category,
-        'assignedTo': assignedToNames,
-        'date': date,
-        'prio': prio,
-        'stat': chosenStat,
-        'subtasks': allSubtasks,
-        'isChecked': isChecked,
-        'doneSubTasks': 0,
-        'color': contactsColors
+    let date = document.getElementById('date').value;
+    let newTaskData = {
+        title: title,
+        description: description,
+        category: category,
+        assigned_to: objIds,
+        due_date: date,
+        priority: prio,
+        status: chosenStat,
+        //'subtasks': allSubtasks,
+        //'isChecked': isChecked,
+        //'doneSubTasks': 0,
+        //color: contactsColors
     };
-    newTaskArray.push(newTask);
-    saveTasks();
-    clearFields();
-    taskAddedToBoard();
+    saveTasks(newTaskData);
 }
 
 /**
  * This asynchronous function saves the new created task in the remote storage and the user will get to the board page.
  */
-async function saveTasks() {
-    await setItem('createdTask', JSON.stringify(newTaskArray));
+async function saveTasks(newTaskData) {
+    try {
+        await createTaskToApi(newTaskData);
+        clearFields();
+        taskAddedToBoardPopUp();
+    } catch (error) {
+        console.error("Fehler beim Speichern der Task:", error);
+    }
     renderBoard();
 }
 
 /**
  * This function shows a popup as a confirm to secure the user that his new created task has been added to the board.
  */
-function taskAddedToBoard() {
+function taskAddedToBoardPopUp() {
     document.getElementById('overlaySection').classList.remove('d-none');
     document.getElementById('overlaySection').innerHTML = /*html*/ `
         <img src="./img/taskAddedToBoard.png" class="taskAddedPopUp" id="taskAddedPopUp">

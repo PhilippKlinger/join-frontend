@@ -17,8 +17,11 @@ async function signUp() {
   let email = document.getElementById("signUpEmail").value;
   let password = document.getElementById("signUpPassword").value;
 
+
+
   try {
-    const data = await signUpWithNameEmailAndPassword(username, email, password);
+    await signUpWithNameEmailAndPassword(username, email, password);
+    //await createContactToApi(contactData); -> Todo
     window.location.replace("http://127.0.0.1:5500/templates/html/login.html?msg=Du hast dich erfolgreich registriert");
     console.log("Sign Up erfolgreich!");
     resetForm();

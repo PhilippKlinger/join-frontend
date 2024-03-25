@@ -26,7 +26,7 @@ const headers = {
 };
 
 
-async function getTasks() {
+async function getTasksFromApi() {
     return fetch('http://127.0.0.1:8000/tasks/', { 
         method: 'GET',
         headers: headers
@@ -34,11 +34,11 @@ async function getTasks() {
     .then(response => response.json());
 }
 
-async function createTask(taskData) {
+async function createTaskToApi(newTaskData) {
     return fetch('http://127.0.0.1:8000/tasks/', {
         method: 'POST',
         headers: headers,
-        body: JSON.stringify(taskData)
+        body: JSON.stringify(newTaskData)
     })
     .then(response => response.json());
 }
