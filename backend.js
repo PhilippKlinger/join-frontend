@@ -95,7 +95,7 @@ async function getContactsFromApi() {
     return await response.json();
 }
 
-async function createContact(contactData) {
+async function createContactToApi(contactData) {
     const response = await fetch('http://127.0.0.1:8000/contacts/', {
         method: 'POST',
         headers: headers,
@@ -107,4 +107,31 @@ async function createContact(contactData) {
     }
 
     return await response.json();
+}
+
+async function deleteContactToApi(contactId) {
+    const response = await fetch(`http://127.0.0.1:8000/contacts/${contactId}/`, {
+        method: 'DELETE',
+        headers: headers,
+    });
+
+    if (!response.ok) {
+        throw new Error('Deleting contact failed');
+    }
+
+    return response; // Da beim Löschen oft kein Inhalt zurückgegeben wird, reicht es hier, die Antwort zu bestätigen
+}
+
+async function editContactToApi(contactId, contactData) {
+    const response = await fetch(`http://127.0.0.1:8000/contacts/${contactId}/`, {
+        method: 'PUT',
+        headers: headers,
+        body: JSON.stringify(contactData),
+    });
+
+    if (!response.ok) {
+        throw new Error('Deleting contact failed');
+    }
+
+    return response;
 }

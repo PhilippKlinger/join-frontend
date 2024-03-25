@@ -15,8 +15,7 @@ function initContacts() {
 async function loadContacts() {
     try {
         const contactsFromApi = await getContactsFromApi();
-        // Transformiere die Kontakte, um ein 'name' Feld zu erstellen,
-        // das 'firstname' und 'lastname' kombiniert
+        allContacts = [];
         allContacts = contactsFromApi.map(contact => ({
             ...contact,
             name: `${contact.firstname} ${contact.lastname}`,
@@ -120,9 +119,23 @@ function highlightContact(i) {
  * @returns {Promise<void>}
  */
 async function createContact() {
-    let { name, email, phone, bgColor, initials, group } = getContactVariables();
-    await saveContact(name, email, phone, bgColor, initials, group);
-    showCreatedContact(name);
+    let { name, email, phone, bgColor } = getContactVariables();
+    let contactData = {
+        firstname: name.split(' ')[0], 
+        lastname: name.split(' ')[1] || '',
+        email: email,
+        phone: phone,
+        color: bgColor
+    };
+
+    try {
+        await createContactToApi(contactData);
+        await loadContacts();
+        showCreatedContact(name); 
+    } catch (error) {
+        console.error('Error creating contact:', error);
+  
+    }
 }
 /**
  * Retrieves the contact details entered in the add contact overlay.
@@ -133,9 +146,7 @@ function getContactVariables() {
     let email = document.getElementById('addContactEmail').value;
     let phone = document.getElementById('addContactPhone').value;
     let bgColor = getBgColor();
-    let initials = getInitials(name);
-    let group = getContactGroup(name);
-    return { name, email, phone, bgColor, initials, group };
+    return { name, email, phone, bgColor};
 }
 /**
  * Saves the newly created contact to the contacts list.
@@ -147,14 +158,12 @@ function getContactVariables() {
  * @param {string} group - The group of the contact.
  * @returns {Promise<void>}
  */
-async function saveContact(name, email, phone, bgColor, initials, group) {
+async function saveContact(name, email, phone, bgColor) {
     allContacts.push({
         name: name,
         email: email,
         phone: phone,
         color: bgColor,
-        initials: initials,
-        group: group,
     })
     await setItem('contacts', JSON.stringify(allContacts));
 }
@@ -179,7 +188,16 @@ function showCreatedContact(name) {
  */
 async function createEditedContact(i) {
     let { editedName, editedEmail, editedPhone } = getEditedVariables();
-    await saveEditedContact(editedName, editedEmail, editedPhone, i);
+    let contactData = {
+        firstname: editedName.split(' ')[0], 
+        lastname: editedName.split(' ')[1] || '',
+        email: editedEmail,
+        phone: editedPhone,
+    };
+    let contactId = i;
+    await editContactToApi(contactId, contactData);
+    await loadContacts();
+    renderContactsList();
     showEditedContact(i);
 }
 /**
@@ -223,10 +241,15 @@ function showEditedContact(i) {
  */
 async function deleteContact(i) {
     let contactToDelete = allContacts[i];
-    delete contactToDelete;
-    allContacts.splice(i, 1);
-    await setItem('contacts', JSON.stringify(allContacts));
+
+    try {
+        await deleteContactToApi(contactToDelete.id); 
+    } catch (error) {
+        console.error('Error deleting contact:', error);
+    }
+    await loadContacts();
     showEmptyContact();
+    renderContactsList();
 }
 /**
  * Shows an empty contact by clearing the contact details and the overlay section.
@@ -255,11 +278,17 @@ function getInitials(name) {
  * @returns {string} - The randomly generated background color.
  */
 function getBgColor() {
-    let x = Math.floor(Math.random() * 256);
-    let y = Math.floor(Math.random() * 256);
-    let z = Math.floor(Math.random() * 256);
-    let bgColor = "rgb(" + x + "," + y + "," + z + ")";
-    return bgColor;
+    const bgColor = [
+        "#fbd1d7", // Pastellrosa
+        "#c1f0f6", // Pastellblau
+        "#b9fbc0", // Pastellgrün
+        "#fcd8d1", // Sehr helles Pastellrosa
+        "#fae1dd", // Pfirsich
+        "#eacea4", // Pastellgelb
+        "#e1ccec", // Pastelllila
+        "#d1c0bf"  // Pastellbraun
+    ];
+    return bgColor[Math.floor(Math.random() * bgColor.length)];
 }
 /**
  * Retrieves the index of a created contact in the contacts list based on its name.
