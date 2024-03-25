@@ -13,7 +13,7 @@ function leadToSignUp() {
   window.location.href = "signUp.html";
 }
 function guestLogIn() {
-  window.location.replace("https://join.philipp-klinger.com/index.html");
+  window.location.replace("http://127.0.0.1:5500/index.html");
 }
 
 

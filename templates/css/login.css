@@ -55,7 +55,7 @@
 }
 
 .textSignupButton {
-    z-index: 2;
+    z-index: 999;
     font-size: 13px;
     display: flex;
     flex-direction: row;

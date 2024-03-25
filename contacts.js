@@ -14,7 +14,15 @@ function initContacts() {
  */
 async function loadContacts() {
     try {
-        allContacts = JSON.parse(await getItem('contacts'));
+        const contactsFromApi = await getContactsFromApi();
+        // Transformiere die Kontakte, um ein 'name' Feld zu erstellen,
+        // das 'firstname' und 'lastname' kombiniert
+        allContacts = contactsFromApi.map(contact => ({
+            ...contact,
+            name: `${contact.firstname} ${contact.lastname}`,
+            initials: `${contact.firstname.charAt(0)}${contact.lastname.charAt(0)}`,
+            group: `${contact.firstname.charAt(0)}`
+        }));
     } catch (e) {
         console.error('Loading error:', e);
     }
@@ -243,17 +251,6 @@ function getInitials(name) {
     return initials;
 }
 /**
- * Determines the group of a contact based on their name.
- * @param {string} name - The name of the contact.
- * @returns {string} - The group of the contact.
- */
-function getContactGroup(name) {
-    let names = name.split(' ');
-    let group = '';
-    group = names[0].charAt(0).toUpperCase();
-    return group;
-}
-/**
  * Generates a random background color.
  * @returns {string} - The randomly generated background color.
  */
@@ -297,8 +294,8 @@ function countGroupObjects(x) {
  */
 function sortContacts() {
     allContacts.sort(function (a, b) {
-        let nameA = a.name.toUpperCase(); // Großbuchstaben für Vergleich
-        let nameB = b.name.toUpperCase();
+        let nameA = a.firstname.toUpperCase(); // Großbuchstaben für Vergleich
+        let nameB = b.firstname.toUpperCase();
         if (nameA < nameB) {
             return -1; // a kommt vor b
         }
