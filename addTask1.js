@@ -7,12 +7,15 @@ let contactsColors = [];
 let objIds = [];
 let dateArray = [];
 let isChecked = [];
+let allCategories = [];
+let selectedCategoryId;
 
 /**
  * This asynchronous function initializes the add task functionality and executes 4 other functions.
  */
 async function initAddTask() {
     document.getElementById('contentSection').innerHTML = generateAddTaskContent();
+    await loadCategories();
     await loadTasks();
     renderHeadline();
     activatePrioButtons();
@@ -24,6 +27,19 @@ async function initAddTask() {
  */
 async function loadTasks() {
     newTaskArray = JSON.parse(await getItem('createdTask'));
+}
+
+
+/**
+ * Loads the contacts from storage.
+ * @returns {Promise<void>}
+ */
+async function loadCategories() {
+    try {
+        allCategories = await getCategoriesFromApi();
+    } catch (e) {
+        console.error('Loading error:', e);
+    }
 }
 
 /**
@@ -173,6 +189,7 @@ function low() {
  * This function opens the dropdown menu to select a category.
  */
 function openCategoryDropdown() {
+    renderCategoryOptions();
     document.getElementById('categoryDropdown').classList.remove('d-none');
     document.getElementById('category').style.cssText = `
         border-bottom-left-radius: 0px;
@@ -238,7 +255,8 @@ function confirmNewCategory() {
  * @param {string} category - This is the name of the selected category.
  * @param {string} color - This is the color of the selected category.
  */
-function selectedCategory(category, color) {
+function selectedCategory(category, color, categoryId) {
+    selectedCategoryId = categoryId;
     category = category.charAt(0).toUpperCase() + category.slice(1);
     document.getElementById('category').innerHTML = /*html*/ `
         ${category}
@@ -258,4 +276,18 @@ function closeCategoryDropdown() {
         border-bottom: 1px solid #D1D1D1;
     `;
     document.getElementById('category').onclick = openCategoryDropdown;
+}
+
+function renderCategoryOptions() {
+    const categoryDropdown = document.getElementById('categoryDropdown');
+
+    allCategories.forEach(category => {
+        categoryDropdown.innerHTML += /*html*/ `
+
+        <div class="categoryOption" id="selectedCategory" value="${category.id}" onclick="selectedCategory('${category.name}', '${category.color}', '${category.id}')">
+                            ${category.name}
+                            <div class="categoryColor" style="background-color: ${category.color}"></div>
+                        </div>
+        `
+    });
 }

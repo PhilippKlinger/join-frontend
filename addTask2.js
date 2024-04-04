@@ -3,17 +3,20 @@
  */
 function assignedTo() {
     let assignee = document.getElementById("assignedTo");
+    let selectedAssigneeIndex = assignee.selectedIndex; // Der Index des ausgewählten Kontakts im Dropdown
+    let selectedContactId = allContacts[selectedAssigneeIndex - 1].id; // -1, weil der erste Eintrag im Dropdown wahrscheinlich "Select contacts to assign" ist
+
     let selectedAssignee = assignee.options[assignee.selectedIndex].value;
     let color = assignee.options[assignee.selectedIndex].id;
     let selectedAssignee2 = assignee.options[assignee.selectedIndex];
     selectedAssignee2.disabled = true;
-    let i = assignee.selectedIndex - 1;
-    let objId = i + 1;
 
+
+  
     if (assignedToNames.indexOf(selectedAssignee) === -1) {
         assignedToNames.push(selectedAssignee);
         contactsColors.push(color);
-        objIds.push(objId);
+        objIds.push(selectedContactId);
     }
     showAssignedToList();
 }
@@ -141,12 +144,12 @@ function changeClearBtnIconToDefault(IdHover, IdDefault) {
 function createTask() {
     let title = document.getElementById('title').value;
     let description = document.getElementById('description').value;
-    let category = document.getElementById('category').innerText;
+    let category = parseInt(selectedCategoryId, 10);   
     let date = document.getElementById('date').value;
     let newTaskData = {
         title: title,
         description: description,
-        category: category,
+        category_id: category,
         assigned_to: objIds,
         due_date: date,
         priority: prio,
@@ -156,6 +159,7 @@ function createTask() {
         //'doneSubTasks': 0,
         //color: contactsColors
     };
+
     saveTasks(newTaskData);
 }
 
