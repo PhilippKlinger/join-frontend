@@ -39,40 +39,10 @@ function generateContentLeftAndRightContainerOverlay() {
                     
                     <div id="categoryOverlay" onclick="openCategoryDropdownOverlay()">Select task category</div>
                     <div id="categoryDropdownOverlay" class="categoryDropdown d-none">
-                        <div class="categoryOption" onclick="newCategoryOverlay()">
+                        <!-- <div class="categoryOption" onclick="newCategoryOverlay()">
                             New category
-                        </div>
-
-                        <div class="categoryOption" value="development" onclick="selectedCategoryOverlay('development', 'red')">
-                            Development
-                            <div class="categoryColor" style="background-color: red"></div>
-                        </div>
-
-                        <div class="categoryOption" value="design" onclick="selectedCategoryOverlay('design', 'orange')">
-                            Design
-                            <div class="categoryColor" style="background-color: orange"></div>
-                        </div>
-
-                        <div class="categoryOption" value="sales" onclick="selectedCategoryOverlay('sales', 'pink')">
-                            Sales
-                            <div class="categoryColor" style="background-color: pink"></div>
-                        </div>
-
-                        <div class="categoryOption" value="backoffice" onclick="selectedCategoryOverlay('backoffice', 'turquoise')">
-                            Backoffice
-                            <div class="categoryColor" style="background-color: turquoise"></div>
-                        </div>
-
-                        <div class="categoryOption" value="media" onclick="selectedCategoryOverlay('media', 'goldenrod')">
-                            Media
-                            <div class="categoryColor" style="background-color: goldenrod"></div>
-                        </div>
-
-                        <div class="categoryOption" value="marketing" onclick="selectedCategoryOverlay('marketing', 'blue')">
-                            Marketing
-                            <div class="categoryColor" style="background-color: blue"></div>
-                        </div>
-                    </div>
+                        </div> -->
+                    </div>       
                 </div>
 
                 <div class="assignedToAndSelect">

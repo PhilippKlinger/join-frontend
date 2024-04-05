@@ -5,7 +5,6 @@ let lastActivePage = 'sidebarSummary';
 async function init() {
     await loadContacts();
     await loadTasks();
-    await loadAllTasks();
     includeHTML();
     initSummary();
     removeClassContentSectionAddTask();

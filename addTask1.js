@@ -31,13 +31,6 @@ async function loadTasks() {
     
 }
 
-async function loadAllTasks() {
-    try {
-        allTasks = JSON.parse(await getItem('createdTask'));  //await getTasksFromApi();
-    } catch (e) {
-        console.error('Loading error:', e);
-    }
-}
 
 
 /**

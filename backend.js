@@ -43,6 +43,19 @@ async function createTaskToApi(newTaskData) {
         .then(response => response.json());
 }
 
+async function deleteTaskToApi(taskId) {
+    const response = await fetch(`http://127.0.0.1:8000/tasks/${taskId}/`, {
+        method: 'DELETE',
+        headers: headers,
+    });
+
+    if (!response.ok) {
+        throw new Error('Deleting contact failed');
+    }
+
+    return response; // Da beim Löschen oft kein Inhalt zurückgegeben wird, reicht es hier, die Antwort zu bestätigen
+}
+
 async function loginWithUsernameAndPassword(username, password) {
     const response = await fetch('http://127.0.0.1:8000/login/', {
         method: 'POST',

@@ -3,7 +3,8 @@
  * 
  * @param {string} stat - This is the status that orders the task on the board.
  */
-function openAddTaskOverlay(stat) {
+async function openAddTaskOverlay(stat) {
+    await loadCategories();
     chosenStat = stat;
     document.getElementById('overlaySection').classList.remove('d-none');
     document.getElementById('overlaySection').innerHTML = /*html*/ `
@@ -142,6 +143,7 @@ function lowOverlay() {
  * This function opens the dropdown menu to select a category.
  */
 function openCategoryDropdownOverlay() {
+    renderCategoryOptionsOverlay();
     document.getElementById('categoryDropdownOverlay').classList.remove('d-none');
     document.getElementById('categoryOverlay').style.cssText = `
         border-bottom-left-radius: 0px;
@@ -207,7 +209,8 @@ function confirmNewCategoryOverlay() {
  * @param {string} category - This is the name of the selected category.
  * @param {string} color - This is the color of the selected category.
  */
-function selectedCategoryOverlay(category, color) {
+function selectedCategoryOverlay(category, color, categoryId) {
+    selectedCategoryId = categoryId;
     category = category.charAt(0).toUpperCase() + category.slice(1);
     document.getElementById('categoryOverlay').innerHTML = /*html*/ `
         ${category}
@@ -320,24 +323,35 @@ function enableContactsForAssignedToOverlay() {
 function createTaskOverlay() {
     let title = document.getElementById('title').value;
     let description = document.getElementById('description').value;
-    let category = document.getElementById('categoryOverlay').innerText;
-    let date = dateArray;
-    let newTask = {
-        'id': '',
-        'title': title,
-        'description': description,
-        'category': category,
-        'assignedTo': assignedToNames,
-        'date': date,
-        'prio': prio,
-        'stat': chosenStat,
-        'subtasks': allSubtasks,
-        'isChecked': isChecked,
-        'doneSubTasks': 0,
-        'color': contactsColors
+    let category = parseInt(selectedCategoryId, 10);   
+    let date = document.getElementById('dateOverlay').value;
+    let newTaskData = {
+        title: title,
+        description: description,
+        category_id: category,
+        assigned_to: objIds,
+        due_date: date,
+        priority: prio,
+        stat: chosenStat,
+        //'subtasks': allSubtasks,
+        //'isChecked': isChecked,
+        //'doneSubTasks': 0,
+        //color: contactsColors
     };
-    newTaskArray.push(newTask);
-    saveTasks();
+    saveTasks(newTaskData);
     clearFieldsOverlay();
-    taskAddedToBoard();
+}
+
+function renderCategoryOptionsOverlay() {
+    const categoryDropdown = document.getElementById('categoryDropdownOverlay');
+
+    allCategories.forEach(category => {
+        categoryDropdown.innerHTML += /*html*/ `
+
+        <div class="categoryOption" id="selectedCategory" value="${category.id}" onclick="selectedCategoryOverlay('${category.name}', '${category.color}', '${category.id}')">
+                            ${category.name}
+                            <div class="categoryColor" style="background-color: ${category.color}"></div>
+                        </div>
+        `
+    });
 }

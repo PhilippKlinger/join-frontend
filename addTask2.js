@@ -153,7 +153,7 @@ function createTask() {
         assigned_to: objIds,
         due_date: date,
         priority: prio,
-        status: chosenStat,
+        stat: chosenStat,
         //'subtasks': allSubtasks,
         //'isChecked': isChecked,
         //'doneSubTasks': 0,
@@ -161,6 +161,7 @@ function createTask() {
     };
 
     saveTasks(newTaskData);
+    clearFields();
 }
 
 /**
@@ -169,13 +170,13 @@ function createTask() {
 async function saveTasks(newTaskData) {
     try {
         await createTaskToApi(newTaskData);
-        clearFields();
         taskAddedToBoardPopUp();
     } catch (error) {
         console.error("Fehler beim Speichern der Task:", error);
     }
     renderBoard();
 }
+
 
 /**
  * This function shows a popup as a confirm to secure the user that his new created task has been added to the board.

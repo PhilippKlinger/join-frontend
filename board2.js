@@ -14,10 +14,9 @@ function renderModifyAssignmentsHTML(Id) {
     }
 }
 
-function renderSubtasksOverview(Id) {
+function renderSubtasksOverview(task) {
     let content = document.getElementById('subtasksOverview');
     content.innerHTML = '';
-    let task = newTaskArray[Id];
     for (let i = 0; i < task['subtasks'].length; i++) {
         const subtask = task['subtasks'][i];
         let isChecked = task['isChecked'][i];
@@ -217,13 +216,16 @@ function confirmChangesOnTask(Id) {
 
 /**
  * Delets the current Task.
- * @param {number} Id - index of the current Task.
+ * @param {number} taskId - index of the current Task.
  */
-function deleteTask(Id) {
-    newTaskArray.splice(Id, 1);
-    giveTaskId();
+async function deleteTask(taskId) {
+    try {
+        await deleteTaskToApi(parseInt(taskId, 10))
+    } catch (error) {
+        console.error('Error deleting task:', error);
+    }
+    
     closeTaskPopUp();
-    saveTasks();
     updateBoardTasks();
 }
 

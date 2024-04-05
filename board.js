@@ -12,17 +12,18 @@ let chosenStat = 'todo';
  * This function assigns an id to each json from the task list.
  */
 function giveTaskId() {
-    for (let i = 0; i < newTaskArray.length; i++) {
-        const currentTask = newTaskArray[i];
-        currentTask['id'] = i;
-    }
+    // for (let i = 0; i < newTaskArray.length; i++) {
+    //     const currentTask = newTaskArray[i];
+    //     currentTask['id'] = i;
+    // }
     removeClassContentSectionAddTask();
 }
 
 /**
  * This function updates all dynamic elements on the board.
  */
-function updateBoardTasks() {
+async function updateBoardTasks() {
+    await loadTasks();
     renderTodoTasksHTML(newTaskArray);
     renderInProgressHTML(newTaskArray);
     renderAwaitingFeedbackHTML(newTaskArray);
@@ -205,12 +206,14 @@ function closeTaskPopUp() {
  */
 function renderClickedTaskPopUpHTML(Id) {
     let content = document.getElementById('overlaySection');
-    let clickedTask = newTaskArray[Id];
+    let clickedTask = newTaskArray.find(task => task.id === Id);
     content.innerHTML = '';
+
     content.innerHTML += renderClickedTaskOverviewPopUpTemplateHTML(clickedTask, Id);
     renderTaskPopUpTableHTML(clickedTask);
     renderTaskPopUpAssignmentsHTML(clickedTask);
-    renderSubtasksOverview(Id);
+
+    renderSubtasksOverview(clickedTask);
 }
 
 /**
