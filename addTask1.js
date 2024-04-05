@@ -26,7 +26,17 @@ async function initAddTask() {
  * This asynchronous function loads the 'createdTask' item from the remote storage.
  */
 async function loadTasks() {
-    newTaskArray = JSON.parse(await getItem('createdTask'));
+    newTaskArray = await getTasksFromApi();
+    // newTaskArray = JSON.parse(await getItem('createdTask'));
+    
+}
+
+async function loadAllTasks() {
+    try {
+        allTasks = JSON.parse(await getItem('createdTask'));  //await getTasksFromApi();
+    } catch (e) {
+        console.error('Loading error:', e);
+    }
 }
 
 

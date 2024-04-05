@@ -27,8 +27,8 @@ function assignedTo() {
 function showAssignedToList() {
     let content = document.getElementById("assignedToList");
     content.innerHTML = "";
-
     for (let i = 0; i < assignedToNames.length; i++) {
+        
         const name = assignedToNames[i];
         let bgColor = contactsColors[i];
         let objId = objIds[i];

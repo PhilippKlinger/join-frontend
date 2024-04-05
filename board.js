@@ -166,7 +166,7 @@ function renderTaskAssignmentListHTML(task, count) {
     for (let i = 0; i < count; i++) {
         const assignment = task['assignedTo'][i];
         let initials = getInitials(assignment);
-        let bgColor = task['color'][i];
+        let bgColor = allContacts[i]['color'];
         content.innerHTML += renderTaskAssignmentsTemplateHTML(task, bgColor, initials);
     }
 }
@@ -233,7 +233,7 @@ function renderTaskPopUpAssignmentsHTML(clickedTask) {
     for (let i = 0; i < clickedTask['assignedTo'].length; i++) {
         const assignment = clickedTask['assignedTo'][i];
         let initials = getInitials(assignment);
-        let bgColor = clickedTask['color'][i];
+        let bgColor = allContacts[i]['color'];
         content.innerHTML += renderTaskAssignmentsPlusInitialsTemplateHTML(assignment, initials, bgColor);
     } 
 }
