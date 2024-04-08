@@ -72,6 +72,7 @@ function renderContactsListMobileButton() {
  * @param {number} i - The index of the contact in the contacts list.
  */
 function showContactDetails(i) {
+   
     checkIfMobile();
     const allData = allContacts[i];
     const { name, email, color, initials, phone } = getJoinData(allData);
@@ -148,25 +149,7 @@ function getContactVariables() {
     let bgColor = getBgColor();
     return { name, email, phone, bgColor};
 }
-/**
- * Saves the newly created contact to the contacts list.
- * @param {string} name - The name of the contact.
- * @param {string} email - The email of the contact.
- * @param {string} phone - The phone number of the contact.
- * @param {string} bgColor - The background color of the contact.
- * @param {string} initials - The initials of the contact.
- * @param {string} group - The group of the contact.
- * @returns {Promise<void>}
- */
-async function saveContact(name, email, phone, bgColor) {
-    allContacts.push({
-        name: name,
-        email: email,
-        phone: phone,
-        color: bgColor,
-    })
-    await setItem('contacts', JSON.stringify(allContacts));
-}
+
 /**
  * Shows the success message and updates the contacts list after a new contact is created.
  * @param {string} name - The name of the created contact.
@@ -186,7 +169,7 @@ function showCreatedContact(name) {
  * @param {number} i - The index of the contact in the contacts list.
  * @returns {Promise<void>}
  */
-async function createEditedContact(i) {
+async function createEditedContact(i) {    
     let { editedName, editedEmail, editedPhone } = getEditedVariables();
     let contactData = {
         firstname: editedName.split(' ')[0], 
@@ -194,7 +177,7 @@ async function createEditedContact(i) {
         email: editedEmail,
         phone: editedPhone,
     };
-    let contactId = i;
+    let contactId = allContacts[i]['id'];
     await editContactToApi(contactId, contactData);
     await loadContacts();
     renderContactsList();
@@ -204,25 +187,11 @@ async function createEditedContact(i) {
  * Retrieves the edited contact details entered in the edit contact overlay.
  * @returns {Object} - The edited contact details.
  */
-function getEditedVariables() {
+function getEditedVariables() { 
     let editedName = document.getElementById('editContactName').value;
     let editedEmail = document.getElementById('editContactEmail').value;
     let editedPhone = document.getElementById('editContactPhone').value;
     return { editedName, editedEmail, editedPhone };
-}
-/**
- * Saves the edited contact details to the contacts list.
- * @param {string} editedName - The edited name of the contact.
- * @param {string} editedEmail - The edited email of the contact.
- * @param {string} editedPhone - The edited phone number of the contact.
- * @param {number} i - The index of the contact in the contacts list.
- * @returns {Promise<void>}
- */
-async function saveEditedContact(editedName, editedEmail, editedPhone, i) {
-    allContacts[i]['name'] = editedName;
-    allContacts[i]['email'] = editedEmail;
-    allContacts[i]['phone'] = editedPhone;
-    await setItem('contacts', JSON.stringify(allContacts));
 }
 /**
  * Shows the edited contact by updating the contacts list and displaying the contact details.

@@ -325,21 +325,28 @@ function createTaskOverlay() {
     let description = document.getElementById('description').value;
     let category = parseInt(selectedCategoryId, 10);   
     let date = document.getElementById('dateOverlay').value;
-    let newTaskData = {
+    let newTaskDataOverlay = {
         title: title,
         description: description,
         category_id: category,
         assigned_to: objIds,
-        due_date: date,
-        priority: prio,
+        date: date,
+        prio: prio,
         stat: chosenStat,
-        //'subtasks': allSubtasks,
-        //'isChecked': isChecked,
-        //'doneSubTasks': 0,
-        //color: contactsColors
+        subtasks: allSubtasks,
     };
-    saveTasks(newTaskData);
+    saveTasksOverlay(newTaskDataOverlay);
     clearFieldsOverlay();
+}
+
+async function saveTasksOverlay(newTaskDataOverlay) {
+    try {
+        await createTaskToApi(newTaskDataOverlay);
+        taskAddedToBoardPopUp();
+    } catch (error) {
+        console.error("Fehler beim Speichern der Task:", error);
+    }
+    renderBoard();
 }
 
 function renderCategoryOptionsOverlay() {

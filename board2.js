@@ -2,24 +2,27 @@
  * Renders all assignments to the modify-pop-up.
  * @param {number} Id - the index of the current Task.
  */
-function renderModifyAssignmentsHTML(Id) {
-    let currentTask = newTaskArray[Id];
+function renderModifyAssignmentsHTML(currentTask) {
+   
     let content = document.getElementById(`modifyPopUpAssignmentContainer${currentTask['id']}`);
     content.innerHTML = '';
-    for (let i = 0; i < currentTask['assignedTo'].length; i++) {
-        const assignment = currentTask['assignedTo'][i];
+
+    for (let i = 0; i < currentTask['assigned_to'].length; i++) {
+        const assignment = currentTask['assigned_to'][i]['name'];
         let initials = getInitials(assignment);
-        let bgColor = currentTask['color'][i];
+        let bgColor = currentTask['assigned_to'][i]['color'];
+        let Id = currentTask['id'];
         content.innerHTML += modifyAssignmentsTemplateHTML(i, Id, bgColor, initials);
     }
 }
 
 function renderSubtasksOverview(task) {
+
     let content = document.getElementById('subtasksOverview');
     content.innerHTML = '';
     for (let i = 0; i < task['subtasks'].length; i++) {
-        const subtask = task['subtasks'][i];
-        let isChecked = task['isChecked'][i];
+        const subtask = task['subtasks'][i]['title'];
+        let isChecked = subtask['completed'];
             content.innerHTML += /*html*/`
                 <div>${i + 1}. ${subtask}</div>
             `;
@@ -46,27 +49,36 @@ function modifyPrio(currentPriority) {
 }
 
 function newModifySubtask(Id) {
-    let newSubtask = document.getElementById('subtasks').value;
-    newTaskArray[Id]['subtasks'].push(newSubtask);
+    
+    let newSubtaskTitle = document.getElementById('subtasks').value;
+    clickedTask = newTaskArray.find(task => task.id === Id);
+    let newSubtaskId = 15;
+    let newSubtaskData = {
+        id: newSubtaskId,
+        title: newSubtaskTitle,
+        completed: false,
+        task: Id,
+    }
+    clickedTask['subtasks'].push(newSubtaskData);
     document.getElementById('subtasks').value = '';
-    renderModifySubtaskList(Id);
+    renderModifySubtaskList(Id);   
 }
 
 /**
  * Renders all Subtasks for the current Task.
  * @param {number} Id - index of the current Task.
  */
-function renderModifySubtaskList(Id) {
+function renderModifySubtaskList() {
     let content = document.getElementById('subtasksList');
-    let task = newTaskArray[Id];
+    let task = clickedTask;
     content.innerHTML = '';
     for (let i = 0; i < task['subtasks'].length; i++) {
         const subtask = task['subtasks'][i];
-        let isChecked = task['isChecked'][i];
-        if(isChecked == true) {
+        let isChecked = subtask['completed'];
+        let Id = task['id'];
+        if(isChecked) {
             content.innerHTML += renderCheckedBoxTemplateHTML(i, Id, subtask);
-        } 
-        if(isChecked == false) {
+        } else {
             content.innerHTML += renderUncheckedBoxTemplateHTML(i, Id, subtask);
         }
     }
@@ -91,6 +103,7 @@ function changeImgBack() {
  * @param {number} Id - index of the current task.
  */
 function renderContactsModifyAddTask(Id) {
+  
     activateEvent();
     let content = document.getElementById('assignedTo');
     content.innerHTML = /*html*/`
@@ -100,7 +113,9 @@ function renderContactsModifyAddTask(Id) {
         const allData = allContacts[i];
         const { name } = getJoinData(allData);
         const { color } = getJoinData(allData);
-        if(newTaskArray[Id]['assignedTo'].includes(name)) {
+        let taskToEdit = newTaskArray.find(task => task.id === Id);
+        let isAssigned = taskToEdit['assigned_to'].some(assignedContact => assignedContact.name === name);
+        if(isAssigned) {
             content.innerHTML += /*html*/ `
                 <option disabled id="${color}" value="${Id}">${name}</option>
         ` } else {
@@ -127,24 +142,31 @@ function modifyAssignedTo() {
     let selectedAssignee2 = assignee.options[assignee.selectedIndex];
     selectedAssignee2.disabled = true;
     let i = (assignee.selectedIndex) - 1;
-    if (newTaskArray[Id]['assignedTo'].indexOf(name) === -1) {
-        newTaskArray[Id]['assignedTo'].push(name);
+    let taskToEdit = newTaskArray.find(task => task.id === Id);
+    if (newTaskArray[Id]['assigned_to'].indexOf(name) === -1) {
+        newTaskArray[Id]['assigned_to'].push(name);
         newTaskArray[Id]['color'].push(color);
     }
     renderModifyAssignmentsHTML(Id);
 }
 
 
-function changeStat(Id, direction) {
-    let currentTask = newTaskArray[Id];
-    let index = taskStatusClasses.indexOf(currentTask['stat']);
-    if(direction == 'up' && index <= 2) {
-        currentTask['stat'] = taskStatusClasses[index + 1];
-    } 
-    if(direction == 'down' && index > 0) {
-        currentTask['stat'] = taskStatusClasses[index - 1];
-    } 
-    saveTasks();
+async function changeStat(id, direction) {
+    let currentTask = newTaskArray.find(task => task.id === id);
+    let currentIndex = taskStatusClasses.indexOf(currentTask['stat']);
+    let newIndex = currentIndex; 
+
+    if (direction === 'up' && currentIndex < taskStatusClasses.length - 1) {
+        newIndex = currentIndex + 1;
+    } else if (direction === 'down' && currentIndex > 0) {
+        newIndex = currentIndex - 1;
+    }
+    let newStat = taskStatusClasses[newIndex];
+    let updatedTaskData = {
+        stat: newStat
+    };
+
+    await updateTaskToApi(id, updatedTaskData);
     updateBoardTasks();
 }
 
@@ -155,12 +177,12 @@ function changeStat(Id, direction) {
  */
 function deleteAssignmentOption(i, Id) {
     let currentTask = newTaskArray[Id];
-    currentTask['assignedTo'].splice(i, 1);
+    currentTask['assigned_to'].splice(i, 1);
     renderModifyAssignmentsHTML(Id);
     let assignee = document.getElementById("modifyAssignedTo");
     let selectedAssignee2 = assignee.options[i];
     selectedAssignee2.disabled = false;
-    if (currentTask['assignedTo'].length === 0) {
+    if (currentTask['assigned_to'].length === 0) {
         assignee.selectedIndex = 0;
     }
 }
@@ -170,18 +192,12 @@ function deleteAssignmentOption(i, Id) {
  * @param {number} i - index of current subtask.
  * @param {number} Id - index of current task.
  */
-function configDoneSubtask(i, Id) {
-    let task = newTaskArray[Id];
-    let currentStatus = document.getElementById(`subtaskCheckBox${i}`).checked;
-    if(currentStatus == true) {
-        task['doneSubTasks']++;
-    } 
-    if (currentStatus == false) {
-        task['doneSubTasks']--;
-        console.log(task['doneSubTasks']);
-    }
-    task['isChecked'][i] = currentStatus;
+async function configDoneSubtask(i, Id) {
+    let task = newTaskArray.find(task => task.id === Id);
+    let subtask = task['subtasks'][i];
+    subtask['completed'] = !subtask['completed'];
 }
+
 
 /**
  * Calculates the progress in percent.
@@ -200,17 +216,22 @@ function calculateProgress(subTaskAmount, doneAmount) {
 /** 
  * Confirms the changes on the current task and save them on the server.
 */
-function confirmChangesOnTask(Id) {
-    let currentTask = newTaskArray[Id];
+async function confirmChangesOnTask() {
+    let currentTask = clickedTask;
+    let taskId = currentTask['id'];
     let newTitle = document.getElementById('modifyTitle').value;
     let newDescription = document.getElementById('modifyDescription').value;
     let newDate = document.getElementById('modifyDate').value;
-    currentTask['title'] = newTitle;
-    currentTask['description'] = newDescription;
-    currentTask['date'] = newDate;
-    currentTask['prio'] = newPrio;
+    let newSubtasks = currentTask['subtasks'];
+    let updatedTaskData = {
+        title: newTitle,
+        description: newDescription,
+        due_date: newDate,
+        prio: newPrio,
+        subtasks: newSubtasks,
+    };
+    await updateTaskToApi(taskId, updatedTaskData);
     closeTaskPopUp();
-    saveTasks();
     updateBoardTasks();
 }
 
@@ -234,8 +255,8 @@ async function deleteTask(taskId) {
  * @param {number} id - index of the current task.
  */
 function startDragging(id) {
-    currentDraggedTask = id;
-    document.getElementById(`pinnedTaskContainer${currentDraggedTask}`).classList.add('rotateDeg');
+    currentDraggedTask = newTaskArray.find(task => task.id === id);
+    document.getElementById(`pinnedTaskContainer${currentDraggedTask['id']}`).classList.add('rotateDeg');
 }
 
 /**
@@ -250,10 +271,15 @@ function allowDrop(ev) {
  * Changes the stat of the dragged task.
  * @param {string} stat - status of the statusbar above which the dragged element is dropped off.
  */
-function drop(stat) {
-    newTaskArray[currentDraggedTask]['stat']  = stat;
-    document.getElementById(`pinnedTaskContainer${currentDraggedTask}`).classList.remove('rotateDeg');
-    saveTasks();
+async function drop(newStat) {
+    let taskId = currentDraggedTask['id'];
+    document.getElementById(`pinnedTaskContainer${taskId}`).classList.remove('rotateDeg');
+
+    let updatedTaskData = {
+       stat: newStat
+    };
+
+    await updateTaskToApi(taskId, updatedTaskData);
     updateBoardTasks();
 }
 

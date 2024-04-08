@@ -17,18 +17,18 @@ function guestLogIn() {
 }
 
 
-async function login() {
-  let username = document.getElementById("loginEmail").value;
-  let password = document.getElementById("loginPassword").value;
+// async function login() {
+//   let username = document.getElementById("loginEmail").value;
+//   let password = document.getElementById("loginPassword").value;
 
-  try {
-    const data = await loginWithUsernameAndPassword(username, password); 
-    localStorage.setItem('authToken', data.token);
-    window.location.replace("http://127.0.0.1:5500/index.html"); 
-    console.log("login erfolgreich!");
-  } catch (error) {
-    console.error(error);
-    document.getElementById("msgBox").innerHTML = `Email oder Passwort nicht korrekt!`;
-    document.getElementById("msgBoxDiv").classList.remove("d-none");
-  }
-}
+//   try {
+//     const data = await loginWithUsernameAndPassword(username, password); 
+//     localStorage.setItem('authToken', data.token);
+//     window.location.replace("http://127.0.0.1:5500/index.html"); 
+//     console.log("login erfolgreich!");
+//   } catch (error) {
+//     console.error(error);
+//     document.getElementById("msgBox").innerHTML = `Email oder Passwort nicht korrekt!`;
+//     document.getElementById("msgBoxDiv").classList.remove("d-none");
+//   }
+//}

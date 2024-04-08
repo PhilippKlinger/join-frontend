@@ -66,25 +66,31 @@ function removeAssignee(position, objId) {
  * This function lets the user add subtasks.
  */
 function newSubtask() {
-    let newSubtask = document.getElementById('subtasks').value;
-
-    if (newSubtask == '') {
+    let newSubtaskTitle = document.getElementById('subtasks').value;
+    if (newSubtaskTitle == '') {
         document.getElementById('subtasks').focus();
     } else {
-        allSubtasks.push(newSubtask);
-        isChecked.push(false);
+        let newSubtaskObj = {
+            title: newSubtaskTitle,
+            completed: false // Setze den initialen Status auf 'false'
+        };
+        allSubtasks.push(newSubtaskObj);
         document.getElementById('subtasksList').innerHTML = '';
         for (let i = 0; i < allSubtasks.length; i++) {
             let subtask = allSubtasks[i];
             document.getElementById('subtasksList').innerHTML += /*html*/ `
                 <div class="subtask">
-                    <input type="checkbox">
-                    <p>${subtask}</p>
+                    <input type="checkbox" ${subtask.completed ? 'checked' : ''} onclick="toggleSubtaskCompleted(${i})">
+                    <p>${subtask.title}</p>
                 </div>
             `;
         }
     }
     document.getElementById('subtasks').value = '';
+}
+
+function toggleSubtaskCompleted(index) {
+    allSubtasks[index].completed = !allSubtasks[index].completed;
 }
 
 /**
@@ -151,15 +157,13 @@ function createTask() {
         description: description,
         category_id: category,
         assigned_to: objIds,
-        due_date: date,
-        priority: prio,
+        date: date,
+        prio: prio,
         stat: chosenStat,
-        //'subtasks': allSubtasks,
-        //'isChecked': isChecked,
+        subtasks: allSubtasks,
         //'doneSubTasks': 0,
-        //color: contactsColors
     };
-
+    debugger
     saveTasks(newTaskData);
     clearFields();
 }

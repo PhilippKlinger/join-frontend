@@ -7,6 +7,7 @@ let currentDraggedOnStatus;
 let filteredTasks = [];
 let newPrio;
 let chosenStat = 'todo';
+let clickedTask;
 
 /**
  * This function assigns an id to each json from the task list.
@@ -75,12 +76,14 @@ function renderTodoTasksHTML(arrayName) {
     let content = document.getElementById('statContainer0');
     let todos = arrayName.filter(task => task['stat'] == 'todo');
     content.innerHTML = '';
+
     for (let i = 0; i < todos.length; i++) {
         const task = todos[i];
         let subtasksAmount = task['subtasks'].length;
-        let doneSubtasks = task['doneSubTasks'];
+        let subtasksArray = task['subtasks']
+        let doneSubtasks = subtasksArray.filter(subtask => subtask.completed === true).length;
         let ProgressPercent = calculateProgress(subtasksAmount, doneSubtasks);
-        content.innerHTML += generatePinnedTaskHTML(task, ProgressPercent);
+        content.innerHTML += generatePinnedTaskHTML(task, ProgressPercent, doneSubtasks);
         renderAssignedToHTML(task);
     }
 }
@@ -96,9 +99,10 @@ function renderInProgressHTML(arrayName) {
     for (let i = 0; i < inProgress.length; i++) {
         const task = inProgress[i];
         let subtasksAmount = task['subtasks'].length;
-        let doneSubtasks = task['doneSubTasks'];
+        let subtasksArray = task['subtasks']
+        let doneSubtasks = subtasksArray.filter(subtask => subtask.completed === true).length;
         let ProgressPercent = calculateProgress(subtasksAmount, doneSubtasks);
-        content.innerHTML += generatePinnedTaskHTML(task, ProgressPercent);
+        content.innerHTML += generatePinnedTaskHTML(task, ProgressPercent, doneSubtasks);
         renderAssignedToHTML(task);
     }
 }
@@ -114,9 +118,10 @@ function renderAwaitingFeedbackHTML(arrayName) {
         for (let i = 0; i < awaitingFeedback.length; i++) {
             const task = awaitingFeedback[i];
             let subtasksAmount = task['subtasks'].length;
-            let doneSubtasks = task['doneSubTasks'];
+            let subtasksArray = task['subtasks']
+            let doneSubtasks = subtasksArray.filter(subtask => subtask.completed === true).length;
             let ProgressPercent = calculateProgress(subtasksAmount, doneSubtasks);
-            content.innerHTML += generatePinnedTaskHTML(task, ProgressPercent);
+            content.innerHTML += generatePinnedTaskHTML(task, ProgressPercent, doneSubtasks);
             renderAssignedToHTML(task);
         }
 }
@@ -132,9 +137,10 @@ function renderDoneHTML(arrayName) {
     for (let i = 0; i < done.length; i++) {
         const task = done[i];
         let subtasksAmount = task['subtasks'].length;
-        let doneSubtasks = task['doneSubTasks'];
+        let subtasksArray = task['subtasks']
+        let doneSubtasks = subtasksArray.filter(subtask => subtask.completed === true).length;
         let ProgressPercent = calculateProgress(subtasksAmount, doneSubtasks);
-        content.innerHTML += generatePinnedTaskHTML(task, ProgressPercent);
+        content.innerHTML += generatePinnedTaskHTML(task, ProgressPercent, doneSubtasks);
         renderAssignedToHTML(task);
     }
 }
@@ -145,14 +151,14 @@ function renderDoneHTML(arrayName) {
  */
 function renderAssignedToHTML(task) {
     let content = document.getElementById(`assignedToContainer${task['id']}`);
-    let assignmentCount = task['assignedTo'].length -3;
+    let assignmentCount = task['assigned_to'].length -3;
     content.innerHTML = '';
-    if (task['assignedTo'].length <= 3) {
-        renderTaskAssignmentListHTML(task, task['assignedTo'].length);
+    if (task['assigned_to'].length <= 3) {
+        renderTaskAssignmentListHTML(task, task['assigned_to'].length);
     } else {
         renderTaskAssignmentListHTML(task, '3');
     }
-    if(task['assignedTo'].length > 3) {
+    if(task['assigned_to'].length > 3) {
         content.innerHTML += renderTaskAssignmentCountHTML(assignmentCount);
     }
 }
@@ -163,11 +169,12 @@ function renderAssignedToHTML(task) {
  * @param {string} count - the number of assignments that are not displayed.
  */
 function renderTaskAssignmentListHTML(task, count) {
+
     let content = document.getElementById(`assignedToContainer${task['id']}`);
     for (let i = 0; i < count; i++) {
-        const assignment = task['assignedTo'][i];
+        const assignment = task['assigned_to'][i]['name'];
         let initials = getInitials(assignment);
-        let bgColor = allContacts[i]['color'];
+        let bgColor = task['assigned_to'][i]['color'];
         content.innerHTML += renderTaskAssignmentsTemplateHTML(task, bgColor, initials);
     }
 }
@@ -206,7 +213,7 @@ function closeTaskPopUp() {
  */
 function renderClickedTaskPopUpHTML(Id) {
     let content = document.getElementById('overlaySection');
-    let clickedTask = newTaskArray.find(task => task.id === Id);
+    clickedTask = newTaskArray.find(task => task.id === Id);
     content.innerHTML = '';
 
     content.innerHTML += renderClickedTaskOverviewPopUpTemplateHTML(clickedTask, Id);
@@ -233,10 +240,10 @@ function renderTaskPopUpTableHTML(clickedTask) {
 function renderTaskPopUpAssignmentsHTML(clickedTask) {
     let content = document.getElementById('taskPopUpAssignmentsList');
     content.innerHTML = '';
-    for (let i = 0; i < clickedTask['assignedTo'].length; i++) {
-        const assignment = clickedTask['assignedTo'][i];
+    for (let i = 0; i < clickedTask['assigned_to'].length; i++) {
+        const assignment = clickedTask['assigned_to'][i]['name'];
         let initials = getInitials(assignment);
-        let bgColor = allContacts[i]['color'];
+        let bgColor = clickedTask['assigned_to'][i]['color'];
         content.innerHTML += renderTaskAssignmentsPlusInitialsTemplateHTML(assignment, initials, bgColor);
     } 
 }
@@ -254,12 +261,13 @@ function openModifyTaskPopUp(Id) {
  * @param {nummber} Id - the index of the current Task.
  */
 function modifyCurrentTaskHTML(Id) {
+    // debugger
+    let currentTask = clickedTask
     let content = document.getElementById('overlaySection');
-    let currentTask = newTaskArray[Id];
     let prio = currentTask['prio'];
     content.innerHTML = '';
     content.innerHTML = renderModifyTaskTemplateHTML(currentTask);
-    renderModifyAssignmentsHTML(Id);
+    renderModifyAssignmentsHTML(currentTask);
     setMinDate('modifyDate');
     modifyPrio(prio);
     renderModifySubtaskList(Id);

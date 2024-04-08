@@ -6,7 +6,7 @@ async function initLogin() {
 }
 
 async function loadUserLogin() {
-  let users = JSON.parse(await getItem("userLogin"));
+  let users = getContactsFromApi();
   userLogin = users;
 }
 

@@ -51,19 +51,23 @@ function renderModifyTaskTemplateHTML(currentTask) {
 
         <div class="assignedToAndSelect">
             <span>Assigned to</span>
-            <select class="modifyInput" id="assignedTo" required onclick="renderContactsModifyAddTask(${currentTask['id']})"> 
+            <!-- <select class="modifyInput" id="assignedTo" required onclick="renderContactsModifyAddTask(${currentTask['id']})">  
                     <option value="" disabled selected>Select contacts to assign</option>
-                </select>
+                </select> -->
 
             <div id="modifyPopUpAssignmentContainer${currentTask['id']}" class="d-flex mt"></div>
         </div>
 
-        <div class="inputAndButton modifyInput">
+        <div class="assignedToAndSelect">
+            <span>Subtasks</span>
+        </div>
+
+        <!-- <div class="inputAndButton modifyInput">
             <input id="subtasks" placeholder="Add new subtask">
             <button type="button" onclick="newModifySubtask(${currentTask['id']})">
                 <img src="./img/subtaskIcon.png">
             </button>
-        </div>
+        </div> -->
 
         <div class="modifySubtaskList" id="subtasksList">
 
@@ -151,7 +155,7 @@ function renderClickedTaskOverviewPopUpTemplateHTML(clickedTask, Id) {
 }
 
 
-function generatePinnedTaskHTML(task, progressInPercent) {
+function generatePinnedTaskHTML(task, progressInPercent, doneSubtasks) {
     return /*html*/`
     <div onclick="openExistingTaskPopUp(${task['id']})">
         <div draggable="true" ondragstart="startDragging(${task['id']})" class="pinnedTaskContainer" id="pinnedTaskContainer${task['id']}">
@@ -173,7 +177,7 @@ function generatePinnedTaskHTML(task, progressInPercent) {
                 <div class="blueProgress" style="width:${progressInPercent}%"></div>
             </div>
             
-            <div class="progressText">${task['doneSubTasks']} / ${task['subtasks'].length} Done</div>
+            <div class="progressText">${doneSubtasks} / ${task['subtasks'].length} Done</div>
         </div>
 
         <div class="pinnedTaskContactsArrowContainer">
@@ -271,7 +275,7 @@ function renderCheckedBoxTemplateHTML(i, Id, subtask) {
     return /*html*/`
     <div class="subtask modifySubtask">
         <input id="subtaskCheckBox${i}" type="checkbox" checked onclick="configDoneSubtask(${i}, ${Id})">
-        <p id="subtaskName${i}">${subtask}</p>
+        <p id="subtaskName${i}">${subtask['title']}</p>
     </div>
     `
 }
@@ -281,7 +285,7 @@ function renderUncheckedBoxTemplateHTML(i, Id, subtask) {
     return /*html*/`
     <div class="subtask modifySubtask">
         <input id="subtaskCheckBox${i}" type="checkbox"  onclick="configDoneSubtask(${i}, ${Id})">
-        <p id="subtaskName${i}">${subtask}</p>
+        <p id="subtaskName${i}">${subtask['title']}</p>
     </div>
     `
 }

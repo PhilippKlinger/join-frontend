@@ -15,10 +15,10 @@ async function initSummary() {
 
 function getCurrentUser() {
   let name;
-  let email = localStorage.getItem('currentEmail');
-  let index = userLogin.findIndex(function (currentUser) {
-    return currentUser.email === email;
-  });
+  let email 
+  // let index = userLogin.findIndex(function (currentUser) {
+  //   return currentUser.email === email;
+  // });
   if (email) {
     name = userLogin[index]['name'];
   } else {
