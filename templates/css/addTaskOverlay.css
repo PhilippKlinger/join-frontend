@@ -34,7 +34,7 @@
     font-size: 21px;
     display: flex;
     align-items: center;
-    background: white url("../../img/dropdownArrow.png") no-repeat right 10px center;
+    background: white url(`${baseUrl}img/dropdownArrow.png`) no-repeat right 10px center;
     cursor: pointer;
 }
 

@@ -1,8 +1,9 @@
 let earliest = [];
 
 async function initSummary() {
-  await loadUserLogin();
-  let currentUser = getCurrentUser();
+  await loadContacts();
+  await loadTasks();
+  let currentUser = localStorage.getItem('username');
   document.getElementById('contentSection').innerHTML = getSummarySection();
   document.getElementById('headlineDiv').innerHTML += getSummaryHeadlineDiv();
   document.getElementById('contentAndGreeting').innerHTML += getSummaryinnerContent();
@@ -11,20 +12,6 @@ async function initSummary() {
   searchDate();
   searchUrgentTasks()
   removeClassContentSectionAddTask();
-}
-
-function getCurrentUser() {
-  let name;
-  let email 
-  // let index = userLogin.findIndex(function (currentUser) {
-  //   return currentUser.email === email;
-  // });
-  if (email) {
-    name = userLogin[index]['name'];
-  } else {
-    name = 'Guest';
-  }
-  return name;
 }
 
 function searchUrgentTasks() {

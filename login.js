@@ -12,23 +12,37 @@ function getMsg() {
 function leadToSignUp() {
   window.location.href = "signUp.html";
 }
-function guestLogIn() {
-  window.location.replace("http://127.0.0.1:5500/index.html");
+async function guestLogIn() {
+  let username = "Gast";
+  let password = "gast1234#";
+
+  try {
+    const data = await loginWithUsernameAndPassword(username, password); 
+    localStorage.setItem('authToken', data.token);
+    localStorage.setItem('username', username);
+    window.location.replace(`${baseUrl}/index.html`); 
+    console.log("login erfolgreich!");
+  } catch (error) {
+    console.error(error);
+    document.getElementById("msgBox").innerHTML = `Username oder Passwort nicht korrekt!`;
+    document.getElementById("msgBoxDiv").classList.remove("d-none");
+  }
 }
 
 
-// async function login() {
-//   let username = document.getElementById("loginEmail").value;
-//   let password = document.getElementById("loginPassword").value;
+async function login() {
+  let username = document.getElementById("loginEmail").value;
+  let password = document.getElementById("loginPassword").value;
 
-//   try {
-//     const data = await loginWithUsernameAndPassword(username, password); 
-//     localStorage.setItem('authToken', data.token);
-//     window.location.replace("http://127.0.0.1:5500/index.html"); 
-//     console.log("login erfolgreich!");
-//   } catch (error) {
-//     console.error(error);
-//     document.getElementById("msgBox").innerHTML = `Email oder Passwort nicht korrekt!`;
-//     document.getElementById("msgBoxDiv").classList.remove("d-none");
-//   }
-//}
+  try {
+    const data = await loginWithUsernameAndPassword(username, password); 
+    localStorage.setItem('authToken', data.token);
+    localStorage.setItem('username', username);
+    window.location.replace(`${baseUrl}/index.html`); 
+    console.log("login erfolgreich!");
+  } catch (error) {
+    console.error(error);
+    document.getElementById("msgBox").innerHTML = `Username oder Passwort nicht korrekt!`;
+    document.getElementById("msgBoxDiv").classList.remove("d-none");
+  }
+}

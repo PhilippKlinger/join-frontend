@@ -1,5 +1,5 @@
 const headers = {
-    'Authorization': `Token ${localStorage.getItem('authToken')}`,
+    'Authorization': `Token ${localStorage.getItem('authToken')}`,  //
     'Content-Type': 'application/json'
 };
 
@@ -114,7 +114,7 @@ async function getCategoriesFromApi() {
 
 
 async function loginWithUsernameAndPassword(username, password) {
-    const response = await fetch('http://127.0.0.1:8000/login/', {
+    const response = await fetch(`${backendUrl}login/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -133,17 +133,13 @@ async function loginWithUsernameAndPassword(username, password) {
     return data;
 }
 
-async function signUpWithNameEmailAndPassword(username, email, password) {
-    const response = await fetch('http://127.0.0.1:8000/register/', {
+async function signUpNewUserToApi(newUserData) {
+    const response = await fetch(`${backendUrl}register/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-            username: username,
-            email: email,
-            password: password,
-        }),
+        body: JSON.stringify(newUserData),
     });
 
     if (!response.ok) {

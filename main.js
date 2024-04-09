@@ -1,10 +1,10 @@
 let allContacts = [];
 let allTasks = [];
 let lastActivePage = 'sidebarSummary';
+//let baseUrl = 'http://127.0.0.1:5500/';
+let baseUrl = 'https://philipp-klinger.developerakademie.net/join-frontend/';
 
 async function init() {
-    await loadContacts();
-    await loadTasks();
     includeHTML();
     initSummary();
     removeClassContentSectionAddTask();
@@ -68,8 +68,9 @@ function doNotClose(event) {
 }
 
 function logOut() {
-    window.location.replace("./templates/html/login.html");
-    localStorage.removeItem("currentEmail");
+    window.location.replace(`${baseUrl}templates/html/login.html`);
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("username");
 }
 
 function showLogOut() {

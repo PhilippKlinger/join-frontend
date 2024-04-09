@@ -476,19 +476,19 @@
 }
 
 .contactOverlayNameIcon {
-    background-image: url('/../img/addContactOverlayInputName.svg');
+    background-image: url("../../img/addContactOverlayInputName.svg");
     background-repeat: no-repeat;
     background-position: 95%;
 }
 
 .contactOverlayEmailIcon {
-    background-image: url('/../img/addContactOverlayInputMail.svg');
+    background-image: url("../../img/addContactOverlayInputMail.svg");
     background-repeat: no-repeat;
     background-position: 95%;
 }
 
 .contactOverlayPhoneIcon {
-    background-image: url('/../img/addContactOverlayInputPhone.svg');
+    background-image: url("../../img/addContactOverlayInputPhone.svg");
     background-repeat: no-repeat;
     background-position: 95%;
 }

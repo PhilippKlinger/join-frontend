@@ -161,9 +161,7 @@ function createTask() {
         prio: prio,
         stat: chosenStat,
         subtasks: allSubtasks,
-        //'doneSubTasks': 0,
     };
-    debugger
     saveTasks(newTaskData);
     clearFields();
 }
